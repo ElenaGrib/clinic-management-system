@@ -9,8 +9,9 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class DoctorDto {
     private Person person;
+
     @NotEmpty
     private String position;
-    private Address address;
 
+    private Address address;
 }

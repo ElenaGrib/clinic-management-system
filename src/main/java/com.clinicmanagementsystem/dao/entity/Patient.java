@@ -2,18 +2,13 @@ package com.clinicmanagementsystem.dao.entity;
 
 import lombok.Data;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
-
 
 @Data
 @Entity
 @Table (name = "patient")
 public class Patient extends BaseEntity {
-
     @Embedded
     private Person person;
 
@@ -21,6 +16,9 @@ public class Patient extends BaseEntity {
     private Address address;
 
     @OneToMany (mappedBy = "id")
-    private List <Doctor> doctors;
+    private List<Doctor> doctors;
 
+    @OneToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name="fk_patient_id")
+    private PatientDetails patientDetails;
 }

@@ -6,6 +6,7 @@ import com.clinicmanagementsystem.dao.entity.Person;
 import com.clinicmanagementsystem.dao.repository.PatientRepository;
 import com.clinicmanagementsystem.service.api.PatientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +15,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PatientServiceImpl implements PatientService {
 
-    private PatientRepository repository;
+    @Autowired
+    private final PatientRepository repository;
 
     @Override
     public Patient create(Person person, Address address) {
@@ -36,7 +38,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List <Patient> getAll() {
+    public List<Patient> getAll() {
         return repository.getAll();
     }
 

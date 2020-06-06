@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: elena
-  Date: 27.05.20
-  Time: 22:06
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <style type="text/css">
     html, #page {
@@ -315,4 +308,13 @@
         background-color: darkgrey;
     }
 
+    /*pagination*/
+    .pagination a.active {
+        background-color: blue;
+        color: white;
+    }
+
+    .pagination a:hover:not(.active) {
+        background-color: #ddd;
+    }
 </style>

@@ -6,8 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@ComponentScan ("com.clinicmanagementsystem.service")
+@ComponentScan (basePackages = {"clinicmanagementsystem.service"})
 @Import (DaoConfig.class)
 public class ServiceConfig {
-
 }

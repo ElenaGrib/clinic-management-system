@@ -12,5 +12,5 @@ public interface ClinicService {
 
     void delete(Long id);
 
-    List <Clinic> getAll();
+    List<Clinic> getAll();
 }

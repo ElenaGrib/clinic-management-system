@@ -9,5 +9,6 @@ import javax.validation.constraints.NotEmpty;
 public class ClinicDto {
     @NotEmpty
     private String name;
+
     private Address address;
 }

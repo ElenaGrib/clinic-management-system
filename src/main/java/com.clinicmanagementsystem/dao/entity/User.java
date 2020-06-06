@@ -2,9 +2,9 @@ package com.clinicmanagementsystem.dao.entity;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+
 
 @Data
 @Entity
@@ -14,11 +14,13 @@ public class User extends BaseEntity {
     private String login;
 
     @Column
+    @Email (message = "Email should be valid")
     private String email;
 
     @Column
     private String password;
 
-    @Column
-    private String status;
+    @ManyToOne
+    @JoinColumn (name = "role_id")
+    private Role role;
 }

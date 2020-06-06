@@ -2,18 +2,24 @@ package com.clinicmanagementsystem.dao.repository.impl;
 
 import com.clinicmanagementsystem.dao.entity.Diagnosis;
 import com.clinicmanagementsystem.dao.repository.DiagnosisRepository;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
+@RequiredArgsConstructor
 public class DiagnosisRepositoryImpl implements DiagnosisRepository {
 
-    private SessionFactory sessionFactory;
+    @Autowired
+    private final SessionFactory sessionFactory;
 
     @Override
-    public Optional <Diagnosis> getDiagnosis(Long patientId) {
+    public Optional<Diagnosis> getDiagnosis(Long patientId) {
         return sessionFactory.getCurrentSession()
                 .createQuery("select e from " + Diagnosis.class.getSimpleName() + " e where e.patientId = :patientId", Diagnosis.class)
                 .setParameter("patientId", patientId)
@@ -42,7 +48,7 @@ public class DiagnosisRepositoryImpl implements DiagnosisRepository {
     }
 
     @Override
-    public List <Diagnosis> getAll() {
+    public List<Diagnosis> getAll() {
         List list = sessionFactory.getCurrentSession()
                 .createQuery("from Diagnosis" + Diagnosis.class)
                 .list();

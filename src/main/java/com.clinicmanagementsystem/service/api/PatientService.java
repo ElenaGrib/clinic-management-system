@@ -13,5 +13,5 @@ public interface PatientService {
 
     void delete(Long id);
 
-    List <Patient> getAll();
+    static List<Patient> getAll();
 }

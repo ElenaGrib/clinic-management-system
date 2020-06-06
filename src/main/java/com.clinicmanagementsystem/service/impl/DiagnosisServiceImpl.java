@@ -4,6 +4,7 @@ import com.clinicmanagementsystem.dao.entity.Diagnosis;
 import com.clinicmanagementsystem.dao.repository.DiagnosisRepository;
 import com.clinicmanagementsystem.service.api.DiagnosisService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -13,7 +14,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DiagnosisServiceImpl implements DiagnosisService {
 
-    private DiagnosisRepository repository;
+    @Autowired
+    private final DiagnosisRepository repository;
 
     @Override
     public Diagnosis create(Long patientId, Date date, String analyzes, String diagnosis, String recipe) {
@@ -31,7 +33,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     }
 
     @Override
-    public List <Diagnosis> getAll() {
+    public List<Diagnosis> getAll() {
         return repository.getAll();
     }
 }

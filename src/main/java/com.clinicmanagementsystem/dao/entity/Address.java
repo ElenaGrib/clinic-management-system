@@ -10,12 +10,16 @@ import javax.persistence.Embeddable;
 public class Address {
     @Column
     private String phone;
+
     @Column
     private String country;
+
     @Column
     private String city;
+
     @Column
     private String street;
+
     @Column
     private String building;
 }

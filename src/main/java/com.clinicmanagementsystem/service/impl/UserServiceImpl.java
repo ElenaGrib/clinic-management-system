@@ -2,38 +2,29 @@ package com.clinicmanagementsystem.service.impl;
 
 import com.clinicmanagementsystem.dao.entity.User;
 import com.clinicmanagementsystem.dao.repository.UserRepository;
-import com.clinicmanagementsystem.service.api.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
-@Log4j
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserDetailsService {
 
-    private UserRepository repository;
-
-    @Override
-    public boolean create(User user) {
-        repository.saveUser(user);
-        return true;
-    }
+    @Autowired
+    private final UserRepository repository;
 
     @Override
-    public User update(User user) {
-        return repository.updateUser(user);
-    }
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        User loadedUser = repository.findUserByLogin(login)
+                .orElseThrow(() -> new UsernameNotFoundException("Пользователь с таким логином не найден!"));
 
-    @Override
-    public void delete(Long id) {
-        repository.deleteUser(id);
-    }
-
-    @Override
-    public List <User> getAll() {
-        return repository.getAll();
+        return new org.springframework.security.core.userdetails.User(loadedUser.getLogin(), loadedUser.getPassword(),
+                Collections.singletonList(new SimpleGrantedAuthority(loadedUser.getRole().getValue())));
     }
 }

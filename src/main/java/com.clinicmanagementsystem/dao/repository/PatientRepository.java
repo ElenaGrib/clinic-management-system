@@ -3,12 +3,18 @@ package com.clinicmanagementsystem.dao.repository;
 import com.clinicmanagementsystem.dao.entity.Address;
 import com.clinicmanagementsystem.dao.entity.Patient;
 import com.clinicmanagementsystem.dao.entity.Person;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
+@Repository
 public interface PatientRepository {
-    Optional <Patient> getPatient(Person person);
+
+    Page<Patient> findById(Long id, Pageable pageable);
+
+    Optional<Patient> getPatient(Person person);
 
     Patient savePatient(Person person, Address address);
 
@@ -16,5 +22,5 @@ public interface PatientRepository {
 
     void deletePatient(Long id);
 
-    List <Patient> getAll();
+   Page<Patient> getAll(Pageable pageable);
 }

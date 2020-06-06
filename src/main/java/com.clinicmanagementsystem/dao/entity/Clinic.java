@@ -9,19 +9,19 @@ import java.util.List;
 @Entity
 @Table (name = "clinic")
 public class Clinic extends BaseEntity {
-
     @Column
     private String name;
 
     @OneToMany (mappedBy = "id")
-    private List <Doctor> doctors;
+    private List<Doctor> doctors;
 
     @ManyToMany (fetch = FetchType.LAZY)
     @JoinTable (name = "clinic_patient",
             joinColumns = @JoinColumn (name = "fk_clinic_id"),
             inverseJoinColumns = @JoinColumn (name = "fk_patient_id")
     )
-    private List <Patient> patients;
+
+    private List<Patient> patients;
 
     @Embedded
     private Address address;

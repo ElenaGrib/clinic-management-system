@@ -12,6 +12,6 @@ public interface DiagnosisService {
 
     void delete(Long id);
 
-    List <Diagnosis> getAll();
+    List<Diagnosis> getAll();
 }
 

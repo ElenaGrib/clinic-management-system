@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Entity
 @Table (name = "doctor")
 public class Doctor extends BaseEntity {
-
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "fk_clinic_id")
     private Clinic clinic;

@@ -6,6 +6,7 @@ import com.clinicmanagementsystem.dao.repository.ClinicRepository;
 import com.clinicmanagementsystem.service.api.ClinicService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,8 +17,8 @@ import java.util.List;
 @Log4j
 public class ClinicServiceImpl implements ClinicService {
 
-
-    private ClinicRepository repository;
+    @Autowired
+    private final ClinicRepository repository;
 
     @Override
     @Transactional
@@ -40,7 +41,7 @@ public class ClinicServiceImpl implements ClinicService {
     }
 
     @Override
-    public List <Clinic> getAll() {
+    public List<Clinic> getAll() {
         return repository.getAll();
     }
 }
