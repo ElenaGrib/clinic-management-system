@@ -1,40 +1,52 @@
 package com.clinicmanagementsystem.web.controller;
 
+import com.clinicmanagementsystem.dao.entity.Role;
 import com.clinicmanagementsystem.dao.entity.User;
-import com.clinicmanagementsystem.service.api.UserService;
+import com.clinicmanagementsystem.dao.repository.RoleRepository;
+import com.clinicmanagementsystem.dao.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.Valid;
-
 @Controller
+@RequiredArgsConstructor
 public class RegisterController {
 
-    private UserService userService;
+    private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    @GetMapping ("/register")
-    public String registration(ModelMap model) {
-        model.addAttribute("userForm", new User());
-        return "redirect:home";
+    @ModelAttribute ("userForm")
+    public User user() {
+        return new User();
     }
 
+    @GetMapping ("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping ("/register")
+    public String registrationForm() {
+        return "register";
+    }
 
     @PostMapping ("/register")
-    public String addUser(@ModelAttribute ("userForm") @Valid User userForm, BindingResult bindingResult, ModelMap model) {
-
-        if (bindingResult.hasErrors()) {
-            return "redirect:home";
-        }
-        if (!userService.create(userForm)) {
-            model.addAttribute("usernameError", "Пользователь с таким именем уже существует!");
-            return "redirect:about";
-        }
-
+    public String registration(User user) {
+        Role userRole = roleRepository.findByName("PATIENT");
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(userRole);
+        userRepository.save(user);
         return "redirect:login";
     }
 
+    @GetMapping ("/register")
+    public String registration(Model model) {
+        model.addAttribute("userForm", new User());
+        return "register";
+    }
 }
