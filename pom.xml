@@ -35,7 +35,7 @@
         <h2.version>1.4.197</h2.version>
         <javax.persistence-api.version>2.2</javax.persistence-api.version>
         <hibernate.version>5.4.2.Final</hibernate.version>
-        <mysql-connector-java.version>8.0.11</mysql-connector-java.version>
+        <mysql-connector-java.version>8.0.16</mysql-connector-java.version>
         <json-path.version>2.2.0</json-path.version>
         <spring-data-jpa.version>2.1.6.RELEASE</spring-data-jpa.version>
 
